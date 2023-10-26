@@ -1,0 +1,4 @@
+deb https://de.mirrors.clouvider.net/ubuntu/ jammy  main universe restricted multiverse
+deb https://de.mirrors.clouvider.net/ubuntu/ jammy-backports  main universe restricted multiverse
+deb https://de.mirrors.clouvider.net/ubuntu/ jammy-security  main universe restricted multiverse
+deb https://de.mirrors.clouvider.net/ubuntu/ jammy-updates  main universe restricted multiverse

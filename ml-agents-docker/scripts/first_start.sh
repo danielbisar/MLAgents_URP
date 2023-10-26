@@ -14,7 +14,6 @@ if [[ ! -f /container_state/pwd_set ]]; then
     touch /container_state/pwd_set
 fi
 
-sudo -u mlagents /tmp/scripts/clone_mlagents.sh
-sudo -u mlagents /bin/bash -c /tmp/scripts/setup_venv.sh
+sudo -u mlagents /bin/bash -c /tmp/scripts/setup_env.sh
 
 touch /container_state/is_initialized

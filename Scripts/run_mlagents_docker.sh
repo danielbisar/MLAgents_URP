@@ -2,15 +2,16 @@
 
 LOCAL_SCRIPT_DIR="$(cd $(dirname "$BASH_SOURCE") && pwd)"
 
-pushd $LOCAL_SCRIPT_DIR 2>/dev/null
-mkdir -p ./mount
+pushd "$LOCAL_SCRIPT_DIR/../ml-agents-docker"
 
-if [ $(docker ps -a | grep mlagents_container | wc -l) -gt 0 ]; then
-    echo "found container: docker start"
-    docker start -ai mlagents_container
-else
-    echo "container not found: docker run"
-    docker run --network=host -v ./mount/:/home/mlagents/src/ -it --name mlagents_container mlagents
-fi
+mkdir -p ./home/src/venv
+mkdir -p ./home/.cache/pip
 
-popd 2>/dev/null
+docker run --network=host \
+    --rm \
+    -v ./home/src/ml-agents:/home/mlagents/src/ml-agents \
+    -v ./home/src/venv:/home/mlagents/src/venv \
+    -v ./home/.cache/pip:/home/mlagents/.cache/pip \
+    -it --name mlagents_container mlagents
+
+popd
