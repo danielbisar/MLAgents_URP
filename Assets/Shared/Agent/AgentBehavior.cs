@@ -1,6 +1,4 @@
 using System;
-using System.Diagnostics;
-using TreeEditor;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -11,7 +9,7 @@ public class AgentBehavior : Agent
 {
     public static int HighScore = 0;
     public static float HighestReward = 0;
-    
+
     public float MoveForce = 50;
     public float MaxSpeedMpS = 3;
     public float SpawnTailS = 0.05f;
@@ -20,7 +18,7 @@ public class AgentBehavior : Agent
     private Rigidbody _rigidbody;
     private int _collectedTargets;
     private float _lastDistance;
-    
+
     public TargetBehavior TargetBehavior { get; set; }
 
     private AgentTailBehavior _agentTailBehavior;
@@ -39,11 +37,11 @@ public class AgentBehavior : Agent
         transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
         _rigidbody.ResetInertiaTensor();
         _tailSpawnTime = Time.time;
-        
+
         _lastDistance = float.PositiveInfinity;
         _collectedTargets = 0;
     }
-    
+
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
@@ -64,7 +62,7 @@ public class AgentBehavior : Agent
             else if(forwardBackward == 2)
                 moveVector.x += 1;
         }
-        
+
         if (rightLeft != 0)
         {
             if (rightLeft == 1)
@@ -72,7 +70,7 @@ public class AgentBehavior : Agent
             else if(rightLeft == 2)
                 moveVector.z += 1;
         }
-        
+
         // calculation of the vector square is faster than calculating the root
         // so we just compare with the _sqrMaxSpeed
         // see: https://docs.unity3d.com/2022.2/Documentation/ScriptReference/Vector3-sqrMagnitude.html
@@ -118,7 +116,7 @@ public class AgentBehavior : Agent
 
         if (value < 0)
             return 1;
-        
+
         //if (value > 0)
         return 2;
     }
